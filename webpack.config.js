@@ -70,10 +70,10 @@ module.exports = {
       short_name: `short_name ${process.env.npm_package_version}`,
       description: "description Placeholder",
       // background_color: "#ffffff",
-      background_color: "#3367D6",
-      theme_color: "#0f4a73",
+      background_color: "#fed322",
+      theme_color: "#fed322",
       display: "standalone",
-      orientation: "landscape",
+      orientation: "portrait",
       crossorigin: "anonymous", //can be null, use-credentials or anonymous
       icons: [
         {
