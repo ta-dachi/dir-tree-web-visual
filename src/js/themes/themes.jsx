@@ -11,7 +11,7 @@ const theme = createMuiTheme({
     secondary: blueGrey
   },
   spacing: {
-    unit: 40
+    unit: 10
   }
 });
 
