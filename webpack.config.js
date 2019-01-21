@@ -30,6 +30,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      },
+      {
         test: /\.scss$/,
         loader: "style-loader!css-loader!sass-loader"
       },
@@ -54,7 +58,7 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     host: "0.0.0.0",
-    port: 3000,
+    port: 3000
   },
   plugins: [
     new HtmlWebPackPlugin({
