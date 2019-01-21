@@ -2,8 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import SortableTree, { toggleExpandedForAll } from "react-sortable-tree";
 import "react-sortable-tree/style.css"; // This only needs to be imported once in your app
+// Material UI
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
 
-export default class FileTreeComponent extends React.Component {
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  textField: {
+    margin: theme.spacing.unit,
+    marginTop: 35,
+    width: 300
+  }
+});
+
+class FileTreeComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -60,29 +75,49 @@ export default class FileTreeComponent extends React.Component {
       searchFoundCount
     } = this.state;
 
+    const { classes } = this.props;
+
     return (
       <div>
         <div>
-          <button onClick={this.toggleNodeExpansion.bind(this, true)}>
+          <Button
+            onClick={this.toggleNodeExpansion.bind(this, true)}
+            className={classes.button}
+            variant="contained"
+            color="primary"
+          >
             Expand all
-          </button>
-          <button
-            className="collapse"
+          </Button>
+          <Button
+            className={classes.button}
+            onClick={this.selectPrevMatch}
+            variant="contained"
+          >
+            Previous
+          </Button>
+          <TextField
+            onChange={this.handleSearchOnChange.bind(this)}
+            className={classes.textField}
+            label="Search"
+          />
+          {/* <label>
+            {searchFocusIndex} / {searchFoundCount}
+          </label> */}
+          <Button
+            className={classes.button}
+            onClick={this.selectNextMatch}
+            variant="contained"
+          >
+            Next
+          </Button>
+          <Button
             onClick={this.toggleNodeExpansion.bind(this, false)}
+            className={classes.button}
+            variant="contained"
+            color="primary"
           >
             Collapse all
-          </button>
-          <label>Search: </label>
-          <input onChange={this.handleSearchOnChange.bind(this)} />
-          <button className="previous" onClick={this.selectPrevMatch}>
-            Previous
-          </button>
-          <button className="next" onClick={this.selectNextMatch}>
-            Next
-          </button>
-          <label>
-            {searchFocusIndex} / {searchFoundCount}
-          </label>
+          </Button>
         </div>
         <SortableTree
           treeData={treeData}
@@ -108,3 +143,5 @@ export default class FileTreeComponent extends React.Component {
 FileTreeComponent.propTypes = {
   treeData: PropTypes.array
 };
+
+export default withStyles(styles)(FileTreeComponent);

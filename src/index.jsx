@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import * as OfflinePluginRuntime from "offline-plugin/runtime";
+import load from "./js/offline/windowEvents";
 import { formatBytes } from "./js/utility/formatBytes";
 import * as anime_archived from "./assets/anime_archived.json";
 import * as anime_02 from "./assets/anime_02.json";
@@ -15,6 +16,11 @@ import FileTreeComponent from "./js/components/FileTreeComponent";
 // Components
 import HelloWorld from "./js/components/HelloWorld";
 
+// Material UI
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import theme from "./js/themes/themes.jsx";
+
+load();
 const json = [
   anime_archived.default,
   anime_02.default,
@@ -49,9 +55,14 @@ OfflinePluginRuntime.install({
   }
 });
 
+function App() {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <FileTreeComponent treeData={json} />
+    </MuiThemeProvider>
+  );
+}
+
 ReactDOM.render(<HelloWorld />, document.getElementById("root"));
 ReactDOM.render(total_size, document.getElementById("stats"));
-ReactDOM.render(
-  <FileTreeComponent treeData={json} />,
-  document.getElementById("tree")
-);
+ReactDOM.render(<App />, document.getElementById("tree"));
