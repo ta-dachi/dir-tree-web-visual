@@ -1,9 +1,6 @@
 import dirTree from "directory-tree";
 import fs from "fs";
 
-// const tree = dirTree(`C:\\Users\\tadachi\\Desktop\\smash_switch_ost`);
-const tree = dirTree(`\\\\10.0.0.12\\Committed01\\_Anime Archived`);
-
 /**
  * Format bytes into a human readable count. It rounds up to a larger size.
  *

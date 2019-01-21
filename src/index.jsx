@@ -2,12 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import * as OfflinePluginRuntime from "offline-plugin/runtime";
+import { formatBytes } from "./js/utility/formatBytes";
+import * as anime_archived from "./assets/anime_archived.json";
+import * as anime_02 from "./assets/anime_02.json";
+import * as anime_03 from "./assets/anime_03.json";
+import * as anime_04 from "./assets/anime_04.json";
 
 // CSS
 import "./css/index.scss";
 
 // Components
 import HelloWorld from "./js/components/HelloWorld";
+
+const json = [
+  anime_archived.default,
+  anime_02.default,
+  anime_03.default,
+  anime_04.default
+];
+const total_size = formatBytes(
+  anime_archived.default.size +
+    anime_02.default.size +
+    anime_03.default.size +
+    anime_04.default.size,
+  4
+);
 
 OfflinePluginRuntime.install({
   onInstalled: () => {
@@ -30,3 +49,4 @@ OfflinePluginRuntime.install({
 });
 
 ReactDOM.render(<HelloWorld />, document.getElementById("root"));
+ReactDOM.render(total_size, document.getElementById("stats"));

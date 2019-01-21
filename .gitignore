@@ -8,3 +8,5 @@ dist/
 
 # Sql Files
 *.sql
+
+scratchpad.js
