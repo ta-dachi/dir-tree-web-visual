@@ -20,7 +20,7 @@ export default class NetworkStatusSnackbar extends React.Component {
   render() {
     const { open } = this.state;
     const { status } = this.props;
-    console.log(open, status);
+
     return (
       <div>
         <Snackbar
@@ -30,6 +30,7 @@ export default class NetworkStatusSnackbar extends React.Component {
             "aria-describedby": "message-id"
           }}
           message={<span id="message-id">{status}</span>}
+          transitionDuration={500}
         />
       </div>
     );

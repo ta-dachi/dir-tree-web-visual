@@ -14,7 +14,7 @@ import "./css/index.scss";
 import FileTreeComponent from "./js/components/FileTreeComponent";
 
 // Components
-import HelloWorld from "./js/components/HelloWorld";
+import NetworkStatusSnackbar from "./js/components/NetworkStatusSnackbar";
 
 // Material UI
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -55,13 +55,33 @@ OfflinePluginRuntime.install({
   }
 });
 
-function App() {
-  return (
-    <MuiThemeProvider theme={theme}>
-      <div>{total_size}</div>
-      <FileTreeComponent treeData={json} />
-    </MuiThemeProvider>
-  );
+class App extends React.Component {
+  state = {
+    loading: true
+  };
+
+  componentDidMount() {
+    // the setTimeout just simulates an async action, after which the component will render the content
+    setTimeout(() => this.setState({ loading: false }), 1300);
+  }
+
+  render() {
+    const { loading } = this.state;
+    const networkCondition = navigator.onLine ? "Online" : "Offline";
+
+    if (loading) {
+      // if your component doesn't have to wait for an async action, remove this block
+      return null; // render null when app is not ready
+    }
+
+    return (
+      <MuiThemeProvider theme={theme}>
+        <div>{total_size}</div>
+        <FileTreeComponent treeData={json} />
+        <NetworkStatusSnackbar open={true} status={networkCondition} />
+      </MuiThemeProvider>
+    );
+  }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("app"));
