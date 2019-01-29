@@ -58,11 +58,10 @@ OfflinePluginRuntime.install({
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
+      <div>{total_size}</div>
       <FileTreeComponent treeData={json} />
     </MuiThemeProvider>
   );
 }
 
-ReactDOM.render(<HelloWorld />, document.getElementById("root"));
-ReactDOM.render(total_size, document.getElementById("stats"));
-ReactDOM.render(<App />, document.getElementById("tree"));
+ReactDOM.render(<App />, document.getElementById("root"));
