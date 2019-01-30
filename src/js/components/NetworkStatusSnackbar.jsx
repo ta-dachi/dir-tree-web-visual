@@ -42,7 +42,7 @@ function CustomSnackbarContent(props) {
     <SnackbarContent
       className={classNames(classes[variant])}
       message={
-        <span id="client-snackbar" className={classes.message}>
+        <span className={classes.message}>
           <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
         </span>
