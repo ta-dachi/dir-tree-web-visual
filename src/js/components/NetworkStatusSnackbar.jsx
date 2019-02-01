@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import classNames from "classnames";
-import WarningIcon from "@material-ui/icons/Warning";
 import { withStyles } from "@material-ui/core/styles";
+import WarningIcon from "@material-ui/icons/Warning";
 import green from "@material-ui/core/colors/green";
 import amber from "@material-ui/core/colors/amber";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -35,23 +37,42 @@ const styles = theme => ({
 });
 
 function CustomSnackbarContent(props) {
-  const { classes, variant, message } = props;
+  const { classes, variant, message, onClose } = props;
   const Icon = variantIcon[variant];
-  console.log(props);
+
   return (
     <SnackbarContent
       className={classNames(classes[variant])}
+      aria-describedby="client-snackbar"
       message={
-        <span className={classes.message}>
+        <span id="client-snackbar" className={classes.message}>
           <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
         </span>
       }
+      action={[
+        <IconButton
+          key="close"
+          aria-label="Close"
+          color="inherit"
+          className={classes.close}
+          onClick={onClose}
+        >
+          <CloseIcon className={classes.icon} />
+        </IconButton>
+      ]}
     />
   );
 }
 
 const CustomSnackbarContentWrapper = withStyles(styles)(CustomSnackbarContent);
+
+CustomSnackbarContent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  message: PropTypes.node,
+  onClose: PropTypes.func,
+  variant: PropTypes.oneOf(["success", "warning"]).isRequired
+};
 
 class NetworkStatusSnackbar extends React.Component {
   state = {
@@ -81,12 +102,12 @@ class NetworkStatusSnackbar extends React.Component {
 
     return (
       <div>
-        <Snackbar
-          open={open}
-          onClose={this.handleClose.bind(this)}
-          transitionDuration={500}
-        >
-          <CustomSnackbarContentWrapper variant={vari} message={status} />
+        <Snackbar open={open} onClose={this.handleClose.bind(this)}>
+          <CustomSnackbarContentWrapper
+            variant={vari}
+            message={status}
+            onClose={this.handleClose.bind(this)}
+          />
         </Snackbar>
       </div>
     );
