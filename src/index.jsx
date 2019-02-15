@@ -62,7 +62,7 @@ class App extends React.Component {
 
   componentDidMount() {
     // the setTimeout just simulates an async action, after which the component will render the content
-    setTimeout(() => this.setState({ loading: false }), 1300);
+    setTimeout(() => this.setState({ loading: false }), 1000);
   }
 
   render() {
