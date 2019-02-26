@@ -66,9 +66,9 @@ module.exports = {
       filename: "index.html"
     }),
     new WebpackPwaManifest({
-      name: `${process.env.npm_package_version} name? `,
-      short_name: `${process.env.npm_package_version} short_name `,
-      description: "description Placeholder",
+      name: `My Ani-List `,
+      short_name: `My Ani-List `,
+      description: `A portable offline directory tree of all my anime. Current Version: ${process.env.npm_package_version}`,
       // background_color: "#ffffff",
       background_color: "#fed322",
       theme_color: "#fed322",
