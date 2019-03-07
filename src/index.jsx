@@ -76,7 +76,7 @@ class App extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <div>{total_size}</div>
+        <div>AniList - {total_size}</div>
         <FileTreeComponent treeData={json} />
         <NetworkStatusSnackbar open={true} status={networkCondition} />
       </MuiThemeProvider>
