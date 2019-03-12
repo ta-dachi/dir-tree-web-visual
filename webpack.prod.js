@@ -4,7 +4,7 @@ const OfflinePlugin = require("offline-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
-
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
   mode: "production",
   entry: {
@@ -63,13 +63,13 @@ module.exports = {
       title: "AniList"
     }),
     new BundleAnalyzerPlugin(),
+    new CleanWebpackPlugin(),
     new WebpackPwaManifest({
       name: `My AniList`,
       short_name: `My AniList`,
       description: `A portable offline directory tree of all my anime. Current Version: ${
         process.env.npm_package_version
       }`,
-      // background_color: "#ffffff",
       background_color: "#fed322",
       theme_color: "#fed322",
       display: "standalone",
@@ -79,7 +79,7 @@ module.exports = {
       icons: [
         {
           src: path.resolve("src/assets/saitama.png"),
-          size: "1024x1024" // you can also use the specifications pattern
+          sizes: [96, 144, 192, 512, 1024]
         }
       ]
     }),

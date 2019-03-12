@@ -11,9 +11,9 @@ import * as anime_04 from "./assets/anime_04.json";
 
 // CSS
 import "./css/index.scss";
-import FileTreeComponent from "./js/components/FileTreeComponent";
 
 // Components
+import FileTreeComponent from "./js/components/FileTreeComponent";
 import NetworkStatusSnackbar from "./js/components/NetworkStatusSnackbar";
 
 // Material UI
